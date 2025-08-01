@@ -1,0 +1,36 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: nginx-pod
+  namespace: nginx
+spec:
+  containers:
+  - name: nginx
+    image: nginx:latest
+    ports:
+    - containerPort: 80
+    livenessProbe:
+      httpGet:
+        path: /health
+        port: 80
+      initialDelaySeconds: 5
+      periodSeconds: 5
+      failureThreshold: 3
+    startupProbe:
+        httpGet:
+          path: /startup
+          port: 80
+        initialDelaySeconds: 5
+        periodSeconds: 10
+        failureThreshold: 30
+    readinessProbe:
+      httpGet:
+        path: /health
+        port: 80
+      initialDelaySeconds: 5
+      periodSeconds: 5
+  tolerations:
+    - key: "prod"
+      operator: "Equal"
+      value: "true"
+      effect: "NoSchedule"

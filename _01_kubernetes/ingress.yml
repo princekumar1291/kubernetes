@@ -1,0 +1,38 @@
+apiVersion: networking.k8s.io/v1      
+kind: Ingress
+metadata:
+  name: app-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx   # Ensure this matches our Ingress controller
+  rules:
+  - http:
+      paths:
+      - path: /                   # Route to frontend
+        pathType: Prefix
+        backend:
+          service:
+            name: frontend-service   # my actual frontend service name
+            port:
+              number: 80
+      - path: /api                # Route to backend
+        pathType: Prefix
+        backend:
+          service:
+            name: backend-service    # my actual backend service name
+            port:
+              number: 80
+
+
+
+# kubectl apply -f https://kind.sigs.k8s.io/examples/ingress/deploy-ingress-nginx.yaml   -> For Ingress Controller -> this creates the ingress controller and service
+# expose this engress -> sudo -E kubectl port-forward service/ingress-nginx-controller -n ingress-nginx 80:80 --address=0.0.0.0 >>>>>>>>>>
+
+
+# With Ingress:
+# You can expose multiple services using one load balancer, saving cost and complexity.
+# You can route traffic like:
+# yourdomain.com/api → backend service
+# yourdomain.com/ → frontend service
+# api.yourdomain.com → another service

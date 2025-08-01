@@ -1,0 +1,8 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: apache-cluster-manager
+rules:
+  - apiGroups: ["", "apps", "batch", "autoscaling"]
+    resources: ["pods", "deployments", "services", "horizontalpodautoscalers"]
+    verbs: ["get", "list", "create", "delete", "update", "patch"]

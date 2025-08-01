@@ -1,0 +1,36 @@
+cluster                                           //(Kind)
+namespace
+pod     (resource quatas and limits,probs)             //not required we can write in deployment.yml
+deployment, statefulset, daemonset, replicaset
+persistent volume, persistent volume claim
+service
+ingress
+configmap, secret
+hpa,vpa,keda
+rbac -> role, rolebinding , serviceaccount
+     -> clusterrole, clusterrolebinding , serviceaccount
+crd(custom resource definition),cr(custom resource), cc(custom controller)
+
+
+
+
+Linkerd-> 
+Istio->Acko drive
+
+helm-> helm is a package manager for Kubernetes. It makes it easier to install, upgrade, and uninstall Helm charts.
+install helm by the docks of the helm website
+
+
+
+
+
+
+jobs
+cronjobs
+
+
+taints and tolerations -> mechanisms used to control pod scheduling on nodes.
+node affinity-> mechanisms used to control pod scheduling on nodes.
+Docker Scout-> Docker Scout is a security tool that analyzes container images to detect vulnerabilities, generate SBOMs, and provide remediation guidance early in the development process.
+
+An SBOM (Software Bill of Materials) is a detailed list of all components, libraries, and dependencies (including versions) that make up a software application or container image—like an "ingredient list" for software—to help with security, compliance, and transparency.
