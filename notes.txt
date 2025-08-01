@@ -11,7 +11,8 @@ rbac -> role, rolebinding , serviceaccount
      -> clusterrole, clusterrolebinding , serviceaccount
 crd(custom resource definition),cr(custom resource), cc(custom controller)
 
-
+init container, sidecar
+service mesh-> linkerd, istio(it is used in kubernetes for service mesh)
 
 
 Linkerd-> 
