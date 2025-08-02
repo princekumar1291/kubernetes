@@ -1,0 +1,31 @@
+1. Add the Prometheus Community Helm Repository
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+
+2. Install Prometheus Stack (includes Prometheus, Grafana, Alertmanager)
+helm install prometheus prometheus-community/kube-prometheus-stack \
+  --namespace monitoring \
+  --create-namespace \
+  --set grafana.service.nodePort=31000 \
+  --set prometheus.service.nodePort=30000 \
+  --set grafana.service.type=NodePort \
+  --set prometheus.service.type=NodePort
+
+3 Get the Grafana service URL
+kubectl get svc -n monitoring
+
+4 Port forward to access Grafana locally
+kubectl port-forward svc/prometheus-kube-prometheus-prometheus 9090:9090 -n monitoring --address=0.0.0.0
+kubectl port-forward svc/prometheus-grafana 3000:80 -n monitoring --address=0.0.0.0
+
+# Get the Grafana admin password
+kubectl get secret prometheus-grafana -n monitoring -o jsonpath="{.data.admin-password}" | base64 -d
+# Get all Grafana secret data
+kubectl get secret prometheus-grafana -n monitoring -o yaml
+
+
+# Uninstall the entire prometheus stack
+helm uninstall prometheus -n monitoring
+
+# Delete the monitoring namespace
+kubectl delete namespace monitoring
